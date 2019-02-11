@@ -523,6 +523,8 @@ class SyncApp:
         # Overwrite existing db.
         col.close()
         try:
+            if os.path.exists(session.get_collection_path()):
+                os.remove(session.get_collection_path())
             os.rename(temp_db_path, session.get_collection_path())
         finally:
             col.reopen()
